@@ -124,7 +124,7 @@ This project is containerized using Docker and deployed on Google Cloud Run.
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/orbit-space-tourism.git
+git clone https://github.com/shrutiscoding/orbit-space-tourism
 cd orbit-space-tourism
 ```
 
