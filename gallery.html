@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbital Experience | ORBIT</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            grid-auto-rows: 300px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 8, 22, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">ORBIT</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="missions.html">Missions</a></li>
+            <li><a href="gallery.html">Experience</a></li>
+            <li><a href="contact.html">Inquiry</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="cart-btn" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Manifest</button>
+        </div>
+    </nav>
+
+    <main style="padding-top: 120px;">
+        <section>
+            <h1 class="section-title reveal">CINEMATIC <span style="color: var(--neon-cyan)">EXPERIENCE</span></h1>
+            <div class="gallery-grid reveal">
+                <div class="gallery-item" style="grid-column: span 2; grid-row: span 2;">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000" alt="Earth from Orbit">
+                    <div class="gallery-overlay"><h3>Earth Observations</h3></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=1000" alt="Spacecraft">
+                    <div class="gallery-overlay"><h3>The Orion-X</h3></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=1000" alt="Mars Surface">
+                    <div class="gallery-overlay"><h3>Martian Sunset</h3></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000" alt="Zero Gravity">
+                    <div class="gallery-overlay"><h3>Zero-G Wellness</h3></div>
+                </div>
+                <div class="gallery-item" style="grid-column: span 2;">
+                    <img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?q=80&w=2000" alt="Saturn Rings">
+                    <div class="gallery-overlay"><h3>Saturn's Majesty</h3></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- AI Concierge & Drawer -->
+    <div class="chat-fab">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </div>
+    <div class="chat-window">
+        <div class="chat-header">
+            <h3>ORBIT Concierge</h3>
+            <span class="chat-close" style="cursor:pointer;">&times;</span>
+        </div>
+        <div class="chat-messages">
+            <div class="message bot">How can I assist your journey across the stars today?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Inquire about Mars, safety, or pricing...">
+            <button id="chat-send" class="btn btn-primary" style="padding: 0.5rem 1rem;">Send</button>
+        </div>
+    </div>
+    <div class="drawer-overlay">
+        <div class="drawer">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
+                <h2>Journey Manifest</h2>
+                <span class="close-drawer" style="cursor:pointer; font-size: 2rem;">&times;</span>
+            </div>
+            <div class="cart-items" style="flex:1; overflow-y:auto;"></div>
+            <div class="cart-footer" style="padding-top: 2rem; border-top: 1px solid var(--glass-border);">
+                <button onclick="checkout()" class="btn btn-primary checkout-btn" style="width: 100%;">Confirm Reservation</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

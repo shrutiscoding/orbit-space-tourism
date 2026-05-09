@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations | ORBIT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">ORBIT</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="missions.html">Missions</a></li>
+            <li><a href="gallery.html">Experience</a></li>
+            <li><a href="contact.html">Inquiry</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="cart-btn" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Manifest</button>
+        </div>
+    </nav>
+
+    <main style="padding-top: 120px;">
+        <section>
+            <h1 class="section-title reveal">EXPLORE THE <span style="color: var(--neon-cyan)">GALAXY</span></h1>
+            <div id="destinations-grid" class="grid reveal">
+                <!-- Loading state -->
+                <p style="text-align: center; grid-column: 1/-1;">Scanning sector for available destinations...</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- AI Concierge -->
+    <div class="chat-fab">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </div>
+    <div class="chat-window">
+        <div class="chat-header">
+            <h3>ORBIT Concierge</h3>
+            <span class="chat-close" style="cursor:pointer;">&times;</span>
+        </div>
+        <div class="chat-messages">
+            <div class="message bot">How can I assist your journey across the stars today?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Inquire about Mars, safety, or pricing...">
+            <button id="chat-send" class="btn btn-primary" style="padding: 0.5rem 1rem;">Send</button>
+        </div>
+    </div>
+
+    <!-- Reservation Drawer -->
+    <div class="drawer-overlay">
+        <div class="drawer">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
+                <h2>Journey Manifest</h2>
+                <span class="close-drawer" style="cursor:pointer; font-size: 2rem;">&times;</span>
+            </div>
+            <div class="cart-items" style="flex:1; overflow-y:auto;"></div>
+            <div class="cart-footer" style="padding-top: 2rem; border-top: 1px solid var(--glass-border);">
+                <button onclick="checkout()" class="btn btn-primary checkout-btn" style="width: 100%;">Confirm Reservation</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        async function fetchDestinations() {
+            const grid = document.getElementById('destinations-grid');
+            try {
+                const response = await fetch('/destinations');
+                const destinations = await response.json();
+                
+                grid.innerHTML = destinations.map(dest => `
+                    <div class="card">
+                        <img src="${dest.image_url}" alt="${dest.name}" class="card-img">
+                        <div class="card-content">
+                            <h3 class="card-title">${dest.name}</h3>
+                            <p style="font-size: 0.9rem; color: var(--lunar-silver); margin-bottom: 1.5rem;">${dest.description}</p>
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <span class="card-price">${dest.ticket_price}</span>
+                                <span style="font-size: 0.8rem; color: var(--lunar-silver);">Duration: ${dest.travel_duration}</span>
+                            </div>
+                            <button onclick="addToCart(${dest.id}, '${dest.name}', '${dest.ticket_price}')" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; font-size: 0.8rem;">Reserve Seat</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #ff4444;">Unable to connect to Galactic Command. Ensure the backend is running.</p>';
+            }
+        }
+        fetchDestinations();
+    </script>
+</body>
+</html>

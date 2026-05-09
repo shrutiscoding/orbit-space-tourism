@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORBIT | Luxury Interplanetary Travel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">ORBIT</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="missions.html">Missions</a></li>
+            <li><a href="gallery.html">Experience</a></li>
+            <li><a href="contact.html">Inquiry</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="cart-btn" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Manifest</button>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1 class="reveal">BEYOND THE <br><span style="color: var(--neon-cyan)">HORIZON</span></h1>
+            <p class="reveal">Experience the pinnacle of luxury interplanetary travel. From the silent craters of the Moon to the vibrant rings of Saturn, your cosmic journey begins here.</p>
+            <div class="reveal">
+                <a href="destinations.html" class="btn btn-primary">Explore Destinations</a>
+            </div>
+            
+            <div class="hero-stats reveal" style="display: flex; gap: 4rem; margin-top: 5rem;">
+                <div class="stat">
+                    <h2 style="color: var(--neon-cyan)">15,400+</h2>
+                    <p style="font-size: 0.8rem; text-transform: uppercase; color: var(--lunar-silver);">Light Years Traveled</p>
+                </div>
+                <div class="stat">
+                    <h2 style="color: var(--neon-cyan)">98.9%</h2>
+                    <p style="font-size: 0.8rem; text-transform: uppercase; color: var(--lunar-silver);">Customer Satisfaction</p>
+                </div>
+                <div class="stat">
+                    <h2 style="color: var(--neon-cyan)">24/7</h2>
+                    <p style="font-size: 0.8rem; text-transform: uppercase; color: var(--lunar-silver);">AI Support</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="experience reveal">
+            <div class="grid" style="align-items: center;">
+                <div class="content">
+                    <h2 class="section-title" style="text-align: left;">UNMATCHED LUXURY</h2>
+                    <p style="color: var(--lunar-silver); margin-bottom: 2rem;">Our spacecraft are designed for comfort and cinematic viewing. Each suite features floor-to-ceiling smart glass that automatically adjusts to cosmic radiation while providing panoramic views of the stars.</p>
+                    <ul style="list-style: none; color: var(--neon-cyan);">
+                        <li style="margin-bottom: 1rem;">✦ Zero-Gravity Wellness Centers</li>
+                        <li style="margin-bottom: 1rem;">✦ Michelin-Star Space Dining</li>
+                        <li style="margin-bottom: 1rem;">✦ AI-Personalized Flight Paths</li>
+                    </ul>
+                </div>
+                <div class="image">
+                    <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?auto=format&fit=crop&q=80&w=1000" alt="Space Suite" style="width: 100%; border-radius: 20px; box-shadow: 0 0 50px rgba(108, 99, 255, 0.2);">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- AI Concierge -->
+    <div class="chat-fab">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </div>
+
+    <div class="chat-window">
+        <div class="chat-header">
+            <h3>ORBIT Concierge</h3>
+            <span class="chat-close" style="cursor:pointer;">&times;</span>
+        </div>
+        <div class="chat-messages">
+            <div class="message bot">Greetings, traveler. I am the ORBIT AI. How can I assist with your interplanetary aspirations?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Inquire about Mars, safety, or pricing...">
+            <button id="chat-send" class="btn btn-primary" style="padding: 0.5rem 1rem;">Send</button>
+        </div>
+    </div>
+
+    <!-- Reservation Drawer -->
+    <div class="drawer-overlay">
+        <div class="drawer">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
+                <h2>Journey Manifest</h2>
+                <span class="close-drawer" style="cursor:pointer; font-size: 2rem;">&times;</span>
+            </div>
+            <div class="cart-items" style="flex:1; overflow-y:auto;">
+                <!-- Items will be injected here -->
+            </div>
+            <div class="cart-footer" style="padding-top: 2rem; border-top: 1px solid var(--glass-border);">
+                <button onclick="checkout()" class="btn btn-primary checkout-btn" style="width: 100%;">Confirm Reservation</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

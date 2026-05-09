@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations & Inquiry | ORBIT</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 3rem;
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--lunar-silver);
+            font-size: 0.9rem;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 1rem;
+            border-radius: 10px;
+            color: white;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">ORBIT</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="missions.html">Missions</a></li>
+            <li><a href="gallery.html">Experience</a></li>
+            <li><a href="contact.html">Inquiry</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="cart-btn" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Manifest</button>
+        </div>
+    </nav>
+
+    <main style="padding-top: 120px;">
+        <section>
+            <h1 class="section-title reveal">FLIGHT <span style="color: var(--neon-cyan)">COORDINATION</span></h1>
+            <div class="contact-container reveal">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Galactic Email</label>
+                        <input type="email" id="email" required placeholder="explorer@orbit.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Inquiry</label>
+                        <textarea id="message" rows="5" required placeholder="Tell us about your dream destination..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Submit Inquiry</button>
+                </form>
+                <div id="form-status" style="margin-top: 2rem; text-align: center; display: none;"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- AI Concierge & Drawer -->
+    <div class="chat-fab">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </div>
+    <div class="chat-window">
+        <div class="chat-header">
+            <h3>ORBIT Concierge</h3>
+            <span class="chat-close" style="cursor:pointer;">&times;</span>
+        </div>
+        <div class="chat-messages">
+            <div class="message bot">How can I assist your journey across the stars today?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Inquire about Mars, safety, or pricing...">
+            <button id="chat-send" class="btn btn-primary" style="padding: 0.5rem 1rem;">Send</button>
+        </div>
+    </div>
+    <div class="drawer-overlay">
+        <div class="drawer">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
+                <h2>Journey Manifest</h2>
+                <span class="close-drawer" style="cursor:pointer; font-size: 2rem;">&times;</span>
+            </div>
+            <div class="cart-items" style="flex:1; overflow-y:auto;"></div>
+            <div class="cart-footer" style="padding-top: 2rem; border-top: 1px solid var(--glass-border);">
+                <button onclick="checkout()" class="btn btn-primary checkout-btn" style="width: 100%;">Confirm Reservation</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const status = document.getElementById('form-status');
+            
+            btn.disabled = true;
+            btn.textContent = 'Transmitting...';
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                const response = await fetch('/contact-submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const data = await response.json();
+                status.style.display = 'block';
+                status.style.color = 'var(--neon-cyan)';
+                status.textContent = data.message;
+                e.target.reset();
+            } catch (error) {
+                status.style.display = 'block';
+                status.style.color = '#ff4444';
+                status.textContent = 'Transmission failed. Galactic Command is unreachable.';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Submit Inquiry';
+            }
+        });
+    </script>
+</body>
+</html>
