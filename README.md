@@ -1,5 +1,4 @@
 
-````markdown
 # 🚀 ORBIT – AI Powered Space Tourism Platform
 
 ORBIT is a futuristic full-stack space tourism web application designed to deliver a cinematic interplanetary travel experience. Users can explore luxury orbital destinations, reserve futuristic journeys, interact with an AI-powered concierge, and experience immersive sci-fi storytelling.
@@ -61,8 +60,6 @@ orbit-space-tourism/
 │
 └── README.md
 ````
-
----
 
 # 🚀 Live Demo
 
